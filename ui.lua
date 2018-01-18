@@ -51,6 +51,16 @@ function ui.addButton(x,y,xsize,ysize,r,g,b,text,textx,texty,page,action)
 
 end
 
+function ui.replaceButton(x,y,xsize,ysize,r,g,b,text,textx,texty,page,action,buttonNumber)
+
+	if action == "inputText" then
+		buttonArray[buttonNumber]={x,y,xsize,ysize,r,g,b,text,textx,texty,page,action,""}
+	else
+		buttonArray[buttonNumber]={x,y,xsize,ysize,r,g,b,text,textx,texty,page,action}
+	end
+
+end
+
 function drawButton()
 
 	for i=1,#buttonArray do
@@ -117,6 +127,9 @@ function mousepressed()
 				        	love.event.quit()
 				        elseif buttonArray[i][12] == "run" then
 				        	menuPage = runPage
+				        elseif buttonArray[i][12] == "fullscreen" then
+				        	if love.window.getFullscreen() == true then love.window.setFullscreen(false) elseif love.window.getFullscreen() == false then love.window.setFullscreen(true) end
+				        	canClick = false
 				        elseif buttonArray[i][12] == "inputText" then
 				        	buttonArray[i][12] = "typing"
 				        	lineTimer = 0
